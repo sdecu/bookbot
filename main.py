@@ -1,6 +1,8 @@
+import string
 def main():
-    get_word_count() 
-
+    book = get_text()
+    get_word_count(book) 
+    get_char_count(book) 
 
 
 def get_text():
@@ -8,12 +10,23 @@ def get_text():
         return f.read()
 
 
-def get_word_count():
-    string = get_text()
+def get_word_count(string):
     string = string.split()
     i = 0
     for s in string:
         i +=1
-    print(i)
+    return i
 
+
+def get_char_count(book):
+    arr = list(book)
+    alphabet = string.ascii_lowercase
+    dict = {}
+    for c in alphabet:
+        i = 0
+        for letter in arr:
+            if c == letter.lower():
+                i += 1
+        dict[c] = i
+    return dict
 main()
