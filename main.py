@@ -1,12 +1,14 @@
 import string
 def main():
-    book = get_text()
+    text = "books/frankenstein.txt"
+    book = get_text(text)
     get_word_count(book) 
     get_char_count(book) 
+    report(book, text)
+    print(report(book, text))
 
-
-def get_text():
-    with open("books/frankenstein.txt") as f:
+def get_text(text):
+    with open(text) as f:
         return f.read()
 
 
@@ -29,4 +31,14 @@ def get_char_count(book):
                 i += 1
         dict[c] = i
     return dict
+
+def report(book, text):
+    p = f"--- Begin report of {text} ---\n"
+    p = p + f"{get_word_count(book)} words found in the document\n\n"
+    dict = get_char_count(book)
+    sort = reversed(sorted(dict.items(), key = lambda item: item[1]))
+    for key, value in sort:
+        p = p + f"The '{key}' character was found {value} times\n"
+    p = p + "--- End report ---"
+    return p
 main()
